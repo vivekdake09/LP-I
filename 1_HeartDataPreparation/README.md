@@ -1,4 +1,4 @@
-Data preparation: Perform following operation on given dataset. a) Find Shape of Data
+1. Data preparation: Perform following operation on given dataset. a) Find Shape of Data
 b) Find Missing Values
 c) Find data type of each column
 d) Finding out Zero's
