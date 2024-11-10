@@ -1,0 +1,94 @@
+•	import pandas as pd: Importing the Pandas library as pd for data manipulation.
+•	import numpy as np: Importing NumPy as np for numerical operations.
+•	import matplotlib.pyplot as plt: Importing Matplotlib for plotting data.
+•	import seaborn as sns: Importing Seaborn for enhanced data visualization.
+•	pd.read_csv('1.csv'): Reads data from a CSV file named 1.csv into a DataFrame df.
+•	print(df): Prints the entire DataFrame.
+•	df.shape: Returns the number of rows and columns in the DataFrame.
+•	df.head(): Displays the first 5 rows of the DataFrame.
+•	df.dtypes: Returns the data type of each column in the DataFrame.
+•	df.isnull().sum(): Checks for null values in each column and sums them up.
+•	(df == 0).sum(): Counts the number of zero values in each column.
+•	df['Age'].mean(): Calculates the mean (average) of the 'Age' column.
+•	df.columns: Returns the list of column names in the DataFrame.
+•	df.info: Displays a summary of the DataFrame, including data types and non-null counts.
+Data Splitting for Machine Learning
+from sklearn.model_selection import train_test_split
+•	Importing train_test_split from sklearn: It is used to split the dataset into training and testing sets.
+hd = df[['Age', 'Sex', 'ChestPain', 'RestBP', 'Chol']]
+x = hd.drop('Age', axis=1)
+y = hd['Age']
+•	hd: Creates a new DataFrame with selected columns.
+•	x: Features DataFrame (independent variables) after dropping 'Age'.
+•	y: Target DataFrame containing the 'Age' column.
+xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.25)
+•	Splitting Data: Splits x and y into training (75%) and testing (25%) sets.
+xtrain.shape
+ytest.shape
+•	Checking Shapes: Displays the dimensions of the training and testing sets.
+Evaluation Metrics
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
+•	Importing Metrics: These are functions for evaluating machine learning models.
+y_true = np.array([1] * 50 + [0] * 450)
+y_pred = np.array([1] * 45 + [0] * 5 + [1] * 55 + [0] * 395)
+•	y_true: Actual labels with 50 positives (1s) and 450 negatives (0s).
+•	y_pred: Predicted labels with 45 true positives, 5 false negatives, 55 false positives, and 395 true negatives.
+conf_matrix = confusion_matrix(y_true, y_pred)
+python
+Copy code
+print("Confusion Matrix:\n", conf_matrix)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1 Score:", f1)
+•	Print Statements: Outputs the confusion matrix and performance metrics.
+General Data Preprocessing Questions:
+1.	What are the 5 major steps of data preprocessing?
+o	Data Cleaning: Handling missing values, correcting data types, removing duplicates.
+o	Data Integration: Combining data from multiple sources.
+o	Data Transformation: Normalizing and scaling data.
+o	Data Reduction: Reducing the dimensionality of data.
+o	Data Splitting: Dividing the data into training and testing sets.
+2.	Why is data preprocessing required?
+o	Data preprocessing is essential to clean and prepare raw data, ensuring it is accurate, consistent, and suitable for machine learning models. It improves model performance and reliability.
+3.	What are the different techniques for data preprocessing in machine learning?
+o	Techniques include handling missing values (imputation), scaling and normalization, encoding categorical data (One-Hot Encoding), feature selection, and data augmentation.
+4.	What is the use of a confusion matrix in machine learning?
+o	A confusion matrix is used to evaluate the performance of a classification model by displaying the counts of true positives, true negatives, false positives, and false negatives.
+5.	How do you calculate precision and recall from the confusion matrix?
+o	Precision = True Positives / (True Positives + False Positives)
+o	Recall = True Positives / (True Positives + False Negatives)
+6.	How can you calculate accuracy using a confusion matrix?
+o	Accuracy = (True Positives + True Negatives) / (Total Number of Samples)
+What is a Confusion Matrix?
+A confusion matrix is a table used to evaluate the performance of a classification model, particularly in binary and multi-class classification problems. It summarizes the predictions made by the model compared to the actual outcomes. The matrix helps in understanding how well the model distinguishes between different classes.
+Structure of a Confusion Matrix (Binary Classification)
+	Predicted: Positive (1)	Predicted: Negative (0)
+Actual: Positive (1)	True Positive (TP)	False Negative (FN)
+Actual: Negative (0)	False Positive (FP)	True Negative (TN)
+•	True Positive (TP): The model correctly predicts a positive class (1).
+•	True Negative (TN): The model correctly predicts a negative class (0).
+•	False Positive (FP): The model incorrectly predicts a positive class (1) when it is actually negative (0). Also known as a Type I error.
+•	False Negative (FN): The model incorrectly predicts a negative class (0) when it is actually positive (1). Also known as a Type II error.
+Formulas Related to the Confusion Matrix
+1.	Accuracy:
+o	Measures the overall correctness of the model.
+2.	Precision (Positive Predictive Value):
+o	Indicates the proportion of positive predictions that were actually correct.
+3.	Recall (Sensitivity or True Positive Rate):
+o	Indicates the proportion of actual positives that were correctly identified.
+4.	Specificity (True Negative Rate):
+o	Indicates the proportion of actual negatives that were correctly identified.
+5.	F1 Score:
+o	Harmonic mean of Precision and Recall, balancing their values.
+F1 Score=2×Precision×RecallPrecision+Recall\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}F1 Score=2×Precision+RecallPrecision×Recall
+6.	False Positive Rate (FPR):
+o	Indicates the proportion of actual negatives that were incorrectly classified as positives.
+False Positive Rate=FPFP+TN\text{False Positive Rate} = \frac{FP}{FP + TN}False Positive Rate=FP+TNFP
+7.	False Negative Rate (FNR):
+o	Indicates the proportion of actual positives that were incorrectly classified as negatives.
+False Negative Rate=FNFN+TP\text{False Negative Rate} = \frac{FN}{FN + TP}False Negative Rate=FN+TPFN
+8.	Positive Predictive Value (PPV) and Negative Predictive Value (NPV):
+o	PPV (Precision): Probability that a positive prediction is correct. PPV=TPTP+FP\text{PPV} = \frac{TP}{TP + FP}PPV=TP+FPTP
+o	NPV: Probability that a negative prediction is correct. NPV=TNTN+FN\text{NPV} = \frac{TN}{TN + FN}NPV=TN+FNTN
+
