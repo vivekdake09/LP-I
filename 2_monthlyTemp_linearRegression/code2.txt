@@ -1,0 +1,56 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+--------------------------------------
+df=pd.read_csv('Temperature.csv')
+print(df)
+-------------------------------------------------
+df.columns
+-------------------------------------
+df.dtypes
+---------------------------------------
+x=df.iloc[:,0].values
+y=df.iloc[:,13].values
+plt.scatter(x,y,color='b',marker='o',s=80)
+plt.show()
+---------------------------------------
+x.shape
+--------------------------------------
+x=x.reshape(117,1)
+-----------------------------------------
+x
+--------------------------------------
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.25,random_state=0)
+-----------------------------------------
+from sklearn.linear_model import LinearRegression
+regression=LinearRegression()
+regression.fit(x_train,y_train)
+----------------------------------------
+m=regression.coef_
+print('Regression Coefficient/slope of regression line',m)
+--------------------------------------------
+c=regression.intercept_
+print('Intercept',c)
+-------------------------------------------
+y_pred=regression.predict(x_test)
+print(y_pred)
+----------------------------------------
+regression.predict([[2018]])
+-------------------------------------
+df1=pd.DataFrame({'Actual value':y_test.flatten(),'Predicted Value':y_pred.flatten()})
+df1
+---------------------------------------
+x_test[0]*m+c
+---------------------
+plt.scatter(x_test,y_test)
+plt.plot(x_test,y_pred,color='r')
+plt.show()
+-----------------------------
+from sklearn import metrics
+print('Mean Absolute Error',metrics.mean_absolute_error(y_test,y_pred))
+print('Mean Squared Error',metrics.mean_squared_error(y_test,y_pred))
+print('Root Mean squared error',np.sqrt(metrics.mean_squared_error(y_test,y_pred)))
+---------------------------------------------
+sns.regplot(x='YEAR',y='ANNUAL',data=df)
