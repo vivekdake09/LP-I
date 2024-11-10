@@ -1,0 +1,56 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+-------------------------------------
+df=pd.read_csv('1.csv')
+print(df)
+--------------------------------------
+df.shape
+--------------------------------------
+df.head()
+--------------------------------------
+df.dtypes
+--------------------------------------
+df.isnull().sum()
+-------------------------------------
+(df==0).sum()
+--------------------------------------
+df['Age'].mean()
+---------------------------------------
+df.columns
+-------------------------------------
+df.info
+-------------------------------------
+from sklearn.model_selection import train_test_split
+-------------------------------------------------------
+hd=df[['Age','Sex','ChestPain','RestBP','Chol']]
+x=hd.drop('Age',axis=1)
+y=hd['Age']
+print(x)
+print(y)
+----------------------------------------------------
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.25)
+xtrain.shape
+---------------------
+ytest.shape
+-----------------------
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
+--------------------------------------------
+y_true = np.array([1] * 50 + [0] * 450) 
+y_pred = np.array([1] * 45 + [0] * 5 + [1] * 55 + [0] * 395)
+---------------------------------------------
+conf_matrix = confusion_matrix(y_true, y_pred)
+-----------------------------------------------
+conf_matrix
+----------------------------------------------------------------------------------------
+accuracy = accuracy_score(y_true, y_pred)
+precision = precision_score(y_true, y_pred)
+recall = recall_score(y_true, y_pred)
+f1 = f1_score(y_true, y_pred)
+----------------------------------
+print("Confusion Matrix:\n", conf_matrix)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1 Score:", f1)
